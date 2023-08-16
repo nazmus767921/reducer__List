@@ -1,21 +1,26 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { styles } from "../../styleGuide";
 import { LiaTimesSolid } from "react-icons/lia";
-import { useState } from "react";
+import { IoPushOutline } from "react-icons/io5";
 import { Flex } from "../../styles/components.styles";
+import ExpandableTextArea from "./ExpandableTextArea";
 
 const tagLines = [
 	{
 		id: 1,
 		name: "Important",
+		color: styles.colors["red-500"],
 	},
 	{
 		id: 2,
 		name: "For Later",
+		color: styles.colors["teal-500"],
 	},
 	{
 		id: 3,
-		name: "Maybe Will do",
+		name: "Not So important",
+		color: styles.colors["gray-100"],
 	},
 ];
 
@@ -49,20 +54,6 @@ const Input = styled.input`
 	outline: none;
 `;
 
-const TextArea = styled.textarea`
-	background-color: transparent;
-
-	color: ${styles.colors["bg-dark"]};
-	border-radius: 0.3em;
-	font-size: ${(props) => (props.$smaller ? ".8em" : "1em")};
-	border: 0px;
-	outline: none;
-	overflow: hidden;
-	max-width: 40ch;
-	min-width: 40ch;
-    max-height: 40ch;
-`;
-
 const Form = styled.form`
 	display: flex;
 	flex-direction: column;
@@ -72,12 +63,12 @@ const Form = styled.form`
 const TagButton = styled.button`
 	font-size: 0.6em;
 	background-color: ${(props) =>
-		props.variant === "$active" ? styles.colors["red-500"] : "#000"};
+		props.variant === "$active" ? props.color : "#000"};
 	color: ${styles.colors["white-100"]};
 	display: flex;
 	width: fit-content;
-	padding: 0.1em 0.4em;
-	border-radius: 0.6em;
+	padding: 0.2em 0.7em;
+	border-radius: 9999px;
 	&:hover {
 		background-color: ${styles.colors["red-600"]};
 	}
@@ -89,8 +80,13 @@ const TagButtonWrapper = styled(Flex)`
 `;
 
 const AddToTaskBTN = styled.button`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.3em;
 	font-size: 0.8em;
 	font-weight: 500;
+	color: ${styles.colors["bg"]};
 	border-radius: 0.5em;
 	background-color: ${styles.colors["yellow-500"]};
 	padding: 0.3em 0.5em;
@@ -100,15 +96,8 @@ const AddToTaskBTN = styled.button`
 `;
 
 const AddTaskUI = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [TagSelected, setTagSelected] = useState(true);
-
-	const [inputValue, setInputValue] = useState("");
-
-	const handleInputChange = (e) => {
-		setInputValue(e.target.value);
-		e.target.style.height = "auto";
-		e.target.style.height = `${e.target.scrollHeight}px`;
-	};
 
 	return (
 		<ModalWrapper>
@@ -124,16 +113,14 @@ const AddTaskUI = () => {
 						type="text"
 						placeholder="Task Name"
 					/>
-					<TextArea
-						$smaller
-						value={inputValue}
-						onChange={handleInputChange}
-						placeholder="description"
-					/>
+
+					<ExpandableTextArea />
+
 					<TagButtonWrapper>
 						{tagLines.map((item, index) => {
 							return (
 								<TagButton
+									color={item.color}
 									key={index}
 									type="button"
 									variant={TagSelected ? "$active" : null}
@@ -143,7 +130,10 @@ const AddTaskUI = () => {
 							);
 						})}
 					</TagButtonWrapper>
-					<AddToTaskBTN>Add Task</AddToTaskBTN>
+					<AddToTaskBTN>
+						<IoPushOutline />
+						Add Task
+					</AddToTaskBTN>
 				</Form>
 			</Card>
 		</ModalWrapper>

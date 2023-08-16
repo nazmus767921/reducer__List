@@ -3,6 +3,7 @@ export const styles = {
 		bg: "#171c2a",
 		"bg-dark": "#11141f",
 		"white-100": "#fcfcfc",
+		"gray-100": "#a4a4a6",
 		"red-500": "#cd424d",
 		"red-600": "#802930",
 		"yellow-500": "#f7c042",
