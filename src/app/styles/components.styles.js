@@ -27,12 +27,28 @@ export const Wrapper = styled.section`
 export const Flex = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: ${(props) => (props.$center ? "center" : "flex-start")};
+	justify-content: ${(props) =>
+		props.$center
+			? "center"
+			: props.$between
+			? "space-between"
+			: props.$around
+			? "space-around"
+			: "flex-start"};
+	align-items: ${(props) => (props.$centery ? "center" : "stretch")};
 `;
 
 export const FlexCol = styled(Flex)`
 	flex-direction: column;
-	align-items: ${(props) => (props.$center ? "center" : "flex-start")};
+	align-items: ${(props) => (props.$centery ? "center" : "stretch")};
+	justify-content: ${(props) =>
+		props.$center
+			? "center"
+			: props.$between
+			? "space-between"
+			: props.$around
+			? "space-around"
+			: "stretch"};
 `;
 
 export const FlexCardWrap = styled(Flex)`
