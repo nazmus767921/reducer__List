@@ -4,7 +4,7 @@ import { styles } from "../styleGuide";
 const { colors } = styles;
 
 export const Title = styled.h1`
-	font-size: 1.5em;
+	font-size: 3em;
 	font-weight: 600;
 	text-align: center;
 	color: ${colors["yellow-500"]};

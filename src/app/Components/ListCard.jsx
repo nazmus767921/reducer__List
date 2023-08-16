@@ -19,6 +19,7 @@ const Card = styled.div`
 
 const Section = styled.div`
 	position: relative;
+	max-width: fit-content;
 `;
 
 const FlexCardWrap = styled(Flex)`

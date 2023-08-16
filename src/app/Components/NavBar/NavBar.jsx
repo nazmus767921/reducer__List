@@ -6,12 +6,13 @@ import AddNewTaskBtn from "./AddNewTaskBtn";
 
 const Nav = styled(Flex)`
 	color: ${styles.colors["white-100"]};
-	width: 100vw;
+	/* width: 100vw; */
 	padding: 0.5em 5em;
 `;
 
 const Date = styled.h3`
-	font-size: 0.8em;
+	padding: .3em;
+	font-size: 1.5em;
 	font-weight: 500;
 	opacity: 60%;
 `;

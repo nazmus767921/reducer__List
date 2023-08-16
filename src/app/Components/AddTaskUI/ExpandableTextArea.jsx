@@ -7,7 +7,7 @@ const TextArea = styled.textarea`
 
 	color: ${styles.colors["bg-dark"]};
 	border-radius: 0.3em;
-	font-size: ${(props) => (props.$smaller ? ".8em" : "1em")};
+	font-size: ${(props) => (props.$smaller ? "1.7em" : "2em")};
 	border: 0px;
 	outline: none;
 	overflow: hidden;

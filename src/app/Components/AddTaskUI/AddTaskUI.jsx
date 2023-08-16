@@ -25,11 +25,18 @@ const tagLines = [
 ];
 
 const ModalWrapper = styled.div`
-	display: flex;
+	display: ${(props) => (props.display === "show" ? "flex" : "none")};
 	justify-content: center;
 	align-items: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99;
 	width: 100vw;
 	height: 100vh;
+	background-color: #11141fe7;
 `;
 
 const Card = styled.div`
@@ -49,7 +56,7 @@ const Input = styled.input`
 
 	color: ${styles.colors["bg-dark"]};
 	border-radius: 0.3em;
-	font-size: ${(props) => (props.$smaller ? ".8em" : "1em")};
+	font-size: ${(props) => (props.$smaller ? "1.8em" : "2em")};
 	border: 0px;
 	outline: none;
 `;
@@ -57,11 +64,11 @@ const Input = styled.input`
 const Form = styled.form`
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
+	gap: 1.75em;
 `;
 
 const TagButton = styled.button`
-	font-size: 0.6em;
+	font-size: 1em;
 	background-color: ${(props) =>
 		props.variant === "$active" ? props.color : "#000"};
 	color: ${styles.colors["white-100"]};
@@ -84,7 +91,7 @@ const AddToTaskBTN = styled.button`
 	justify-content: center;
 	align-items: center;
 	gap: 0.3em;
-	font-size: 0.8em;
+	font-size: 1.5em;
 	font-weight: 500;
 	color: ${styles.colors["bg"]};
 	border-radius: 0.5em;
@@ -95,18 +102,25 @@ const AddToTaskBTN = styled.button`
 	}
 `;
 
-const AddTaskUI = () => {
+const AddTaskUI = ({ isOpen, setIsOpen }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [TagSelected, setTagSelected] = useState(true);
 
 	return (
-		<ModalWrapper>
+		<ModalWrapper display={isOpen === true && "show"}>
 			<Card>
 				<button
 					type="button"
 					style={{ alignSelf: "flex-end" }}
+					onClick={() => setIsOpen((prev) => !prev)}
 				>
-					<LiaTimesSolid style={{ color: styles.colors["bg-dark"] }} />
+					<LiaTimesSolid
+						style={{
+							color: styles.colors["bg-dark"],
+							width: "2em",
+							height: "2em",
+						}}
+					/>
 				</button>
 				<Form>
 					<Input

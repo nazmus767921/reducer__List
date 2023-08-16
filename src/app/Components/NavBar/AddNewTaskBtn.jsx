@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { IoIosAdd } from "react-icons/io";
 import { styles } from "../../styleGuide";
+import AddTaskUI from "../AddTaskUI/AddTaskUI";
+import { useState } from "react";
 
 const AddButton = styled.button`
-	font-size: 0.8rem;
+	font-size: 1.25rem;
 	font-weight: 500;
 	display: flex;
 	justify-content: space-between;
@@ -21,11 +23,18 @@ const AddButton = styled.button`
 `;
 
 const AddNewTaskBtn = () => {
+	const [isOpen, setIsOpen] = useState(false);
 	return (
-		<AddButton>
-			<IoIosAdd style={{ width: "1.35em", height: "1.35em" }} />
-			New Task
-		</AddButton>
+		<>
+			<AddTaskUI
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+			/>
+			<AddButton onClick={() => setIsOpen(true)}>
+				<IoIosAdd style={{ width: "1.35em", height: "1.35em" }} />
+				New Task
+			</AddButton>
+		</>
 	);
 };
 
