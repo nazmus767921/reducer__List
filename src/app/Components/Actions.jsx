@@ -1,8 +1,9 @@
 import { FaTrash } from "react-icons/fa6";
 import { TbEdit } from "react-icons/tb";
 import styled from "styled-components";
-import { FlexCol, Flex } from "../styles/components.styles";
+import { FlexCol } from "../styles/components.styles";
 import { styles } from "../styleGuide";
+import { useGlobalContext } from "../context";
 
 const ActionBTNWrapper = styled(FlexCol)`
 	height: 100%;
@@ -18,11 +19,23 @@ const ActionWrapper = styled(FlexCol)`
 	border-radius: 0 20px 20px 0;
 `;
 
-const Actions = () => {
+const Actions = ({ id }) => {
+	const { dispatch } = useGlobalContext();
+
+	const handleDelete = (id) => {
+		dispatch({ type: "DELETE_TASK", payload: id });
+	};
+
+	const handleEdit = (id) => {
+		dispatch({ type: "EDIT_TASK", payload: id });
+	};
 	return (
 		<ActionWrapper>
 			<ActionBTNWrapper $around>
-				<button type="button">
+				<button
+					type="button"
+					onClick={() => handleDelete(id)}
+				>
 					<FaTrash
 						style={{
 							width: "1.25em",
@@ -31,7 +44,10 @@ const Actions = () => {
 						}}
 					/>
 				</button>
-				<button type="button">
+				<button
+					type="button"
+					onClick={() => handleEdit(id)}
+				>
 					<TbEdit
 						style={{
 							width: "1.25em",

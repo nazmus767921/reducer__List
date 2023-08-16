@@ -3,6 +3,7 @@ import { RxDotsHorizontal } from "react-icons/rx";
 import { Flex, FlexCol, SmallPara } from "../styles/components.styles";
 import styled from "styled-components";
 import Actions from "./Actions";
+import { useGlobalContext } from "../context";
 
 const { colors } = styles;
 
@@ -20,6 +21,7 @@ const Card = styled.div`
 const Section = styled.div`
 	position: relative;
 	max-width: fit-content;
+	min-width: 70%;
 `;
 
 const FlexCardWrap = styled(Flex)`
@@ -33,6 +35,7 @@ const VerticalLine = styled.div`
 `;
 
 const Date = styled.h3`
+	font-size: 1em;
 	color: ${colors["bg-dark"]};
 	font-weight: 500;
 `;
@@ -45,7 +48,7 @@ const Time = styled(Date)`
 `;
 
 const Tag = styled.p`
-	color: ${colors["red-500"]};
+	color: ${(props) => props.color};
 `;
 
 const Title = styled.h2`
@@ -61,40 +64,48 @@ const Description = styled.p`
 	opacity: 40%;
 `;
 
-const ListContentTop = styled(Flex)`
-	margin: 0 0 0.5em 0;
+const ListContent = styled(FlexCol)`
+	width: 100%;
 `;
 
-const ListCard = () => {
+const ListContentTop = styled(Flex)`
+	margin: 0 0 0.5em 0;
+	width: 100%;
+`;
+
+const DateContainer = styled(FlexCol)`
+	gap: 0.3em;
+`;
+
+const ListCard = ({ id, taskName, description, tag, entryDate }) => {
+	const { weekDay, dateOfMonth, month } = entryDate;
 	return (
 		<Section>
 			<Card>
 				<FlexCardWrap>
-					<FlexCol>
-						<Date>27.12.2001</Date>
+					<DateContainer>
+						<Date>
+							{weekDay}, {dateOfMonth} {month}
+						</Date>
 						<Time>
 							10:00
 							<SmallPara> AM</SmallPara>
 						</Time>
-					</FlexCol>
+					</DateContainer>
 					<VerticalLine />
-					<FlexCol>
+					<ListContent>
 						<ListContentTop $between>
-							<Tag>Tagline</Tag>
+							<Tag color={tag.color}>{tag.tagName}</Tag>
 							<button type="button">
 								<RxDotsHorizontal />
 							</button>
 						</ListContentTop>
-						<Title>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						</Title>
-						<Description>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						</Description>
-					</FlexCol>
+						<Title>{taskName}</Title>
+						<Description>{description}</Description>
+					</ListContent>
 				</FlexCardWrap>
 			</Card>
-			<Actions />
+			<Actions id={id} />
 		</Section>
 	);
 };

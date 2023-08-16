@@ -11,13 +11,47 @@ const Nav = styled(Flex)`
 `;
 
 const Date = styled.h3`
-	padding: .3em;
+	padding: 0.3em;
 	font-size: 1.5em;
 	font-weight: 500;
 	opacity: 60%;
 `;
 
+export const getDate = () => {
+	const MONTHS = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	const WEEKDAY = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+	const d = new window.Date();
+	const weekDay = d.getDay();
+	const Month = d.getMonth();
+	const dateOfMonth = d.getDate();
+
+	return { MONTHS, WEEKDAY, weekDay, Month, dateOfMonth };
+};
+
 const NavBar = () => {
+	const { MONTHS, WEEKDAY, weekDay, Month, dateOfMonth } = getDate();
+
 	return (
 		<Nav
 			$between
@@ -25,7 +59,9 @@ const NavBar = () => {
 		>
 			<FlexCol>
 				<Title>Today's Task</Title>
-				<Date>WednesDay, 20 Jun</Date>
+				<Date>
+					{WEEKDAY[weekDay]}, {dateOfMonth} {MONTHS[Month]}
+				</Date>
 			</FlexCol>
 			<AddNewTaskBtn></AddNewTaskBtn>
 		</Nav>

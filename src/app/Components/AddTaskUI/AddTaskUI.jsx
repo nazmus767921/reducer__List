@@ -5,6 +5,7 @@ import { LiaTimesSolid } from "react-icons/lia";
 import { IoPushOutline } from "react-icons/io5";
 import { Flex } from "../../styles/components.styles";
 import ExpandableTextArea from "./ExpandableTextArea";
+import { useGlobalContext } from "../../context";
 
 const tagLines = [
 	{
@@ -105,9 +106,18 @@ const AddToTaskBTN = styled.button`
 const AddTaskUI = ({ isOpen, setIsOpen }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [TagSelected, setTagSelected] = useState(true);
+	const { state, dispatch } = useGlobalContext();
+
+	const handleInput = (e) => {
+		dispatch({ type: "TAKE_INPUT", payload: e });
+	};
+
+	const handleTagSelection = (tag) => {
+		dispatch({ type: "TAG_SELECT", payload: tag });
+	};
 
 	return (
-		<ModalWrapper display={isOpen === true && "show"}>
+		<ModalWrapper display={isOpen ? "show" : "hidden"}>
 			<Card>
 				<button
 					type="button"
@@ -122,10 +132,14 @@ const AddTaskUI = ({ isOpen, setIsOpen }) => {
 						}}
 					/>
 				</button>
-				<Form>
+				<Form onSubmit={(e) => dispatch({ type: "SUBMIT_TASK", payload: e })}>
 					<Input
 						type="text"
+						name="taskName"
+						value={state.task.taskName}
+						onChange={(e) => handleInput(e)}
 						placeholder="Task Name"
+						required
 					/>
 
 					<ExpandableTextArea />
@@ -137,6 +151,7 @@ const AddTaskUI = ({ isOpen, setIsOpen }) => {
 									color={item.color}
 									key={index}
 									type="button"
+									onClick={() => handleTagSelection(item)}
 									variant={TagSelected ? "$active" : null}
 								>
 									{item.name}

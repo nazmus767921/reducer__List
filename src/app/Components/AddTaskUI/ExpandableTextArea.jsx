@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { styles } from "../../styleGuide";
+import { useGlobalContext } from "../../context";
 
 const TextArea = styled.textarea`
 	background-color: transparent;
@@ -17,10 +18,11 @@ const TextArea = styled.textarea`
 `;
 
 const ExpandableTextArea = () => {
-	const [inputValue, setInputValue] = useState("");
+	const { state, dispatch } = useGlobalContext();
 
 	const handleInputChange = (e) => {
-		setInputValue(e.target.value);
+		// setInputValue(e.target.value);
+		dispatch({ type: "TAKE_INPUT", payload: e });
 		e.target.style.height = "auto";
 		e.target.style.height = `${e.target.scrollHeight}px`;
 	};
@@ -28,8 +30,10 @@ const ExpandableTextArea = () => {
 	return (
 		<TextArea
 			$smaller
-			value={inputValue}
-			onChange={handleInputChange}
+			// value={inputValue}
+			name="description"
+			value={state.task.description}
+			onChange={(e) => handleInputChange(e)}
 			placeholder="description"
 		/>
 	);
