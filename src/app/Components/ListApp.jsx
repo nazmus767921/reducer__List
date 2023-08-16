@@ -1,12 +1,14 @@
 import { Flex } from "../styles/components.styles";
-import ListCard from "./ListCard";
-import NavBar from "./NavBar/NavBar";
+import AddTaskUI from "./AddTaskUI/AddTaskUI";
+// import ListCard from "./ListCard";
+// import NavBar from "./NavBar/NavBar";
 
 const ListApp = () => {
 	return (
 		<Flex $center>
-			<NavBar />
+			{/* <NavBar /> */}
 			{/* <ListCard /> */}
+			<AddTaskUI />
 		</Flex>
 	);
 };
