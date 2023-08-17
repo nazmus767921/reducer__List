@@ -1,11 +1,20 @@
 import getDate from "./Components/GetDate";
 
 export const reducer = (state, action) => {
+	//? empty the task property for future input when submits
+	const emptyTask = {
+		id: "",
+		taskName: "",
+		description: "",
+		tag: { id: "", tagName: "" },
+	};
+
 	if (action.type === "TOGGLE_OPEN_ADD_TASK") {
 		return {
 			...state,
 			isAddTaskOpen: !state.isAddTaskOpen,
 			isEditing: false,
+			task: emptyTask,
 		};
 	}
 
@@ -38,14 +47,6 @@ export const reducer = (state, action) => {
 		//? stops the page from reloading while submitting.
 		const e = action.payload;
 		e.preventDefault();
-
-		//? empty the task property for future input when submits
-		const emptyTask = {
-			id: "",
-			taskName: "",
-			description: "",
-			tag: { id: "", tagName: "" },
-		};
 
 		//? submitting conditions
 		let newList = [];

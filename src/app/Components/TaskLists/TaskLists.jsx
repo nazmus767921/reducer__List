@@ -1,5 +1,4 @@
 import { useGlobalContext } from "../../context";
-import { Flex, FlexCol } from "../../styles/components.styles";
 import ListCard from "../ListCard";
 import styled from "styled-components";
 

@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+	createContext,
+	useContext,
+	useEffect,
+	useReducer,
+	useState,
+} from "react";
 import { reducer } from "./Reducer";
 const AppContext = createContext();
 
@@ -25,6 +31,7 @@ const initialState = {
 export const AppProvider = ({ children }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useReducer(reducer, initialState);
+	//AddTaskUI->TAG component
 
 	useEffect(() => {
 		localStorage.setItem("list", JSON.stringify(state.list));

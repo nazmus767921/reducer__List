@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { styles } from "../../styleGuide";
 import { LiaTimesSolid } from "react-icons/lia";
 import { IoPushOutline } from "react-icons/io5";
@@ -14,18 +13,39 @@ import {
 	TagButtonWrapper,
 	AddToTaskBTN,
 } from "./AddTaskUI.styles";
+import { useState } from "react";
 
+
+//? Tag component
+function Tag(props) {
+	const [SelectedTag, setSelectedTag] = useState("temp");
+
+	// const [SelectedTag, setSelectedTag] = useState("temp");
+
+	const handleTagSelection = (tag) => {
+		setSelectedTag(tag.name);
+		props.dispatch({ type: "TAG_SELECT", payload: tag });
+	};
+
+	return (
+		<TagButton
+			color={props.item.color}
+			type="button"
+			onClick={() => handleTagSelection(props.item)}
+			variant={SelectedTag === props.tagName ? "$selected" : "$notSelected"}
+		>
+			{props.item.name}
+		</TagButton>
+	);
+}
+
+//! Main Component
 const AddTaskUI = () => {
 	// eslint-disable-next-line no-unused-vars
-	const [TagSelected, setTagSelected] = useState(true);
 	const { state, dispatch } = useGlobalContext();
 
 	const handleInput = (e) => {
 		dispatch({ type: "TAKE_INPUT", payload: e });
-	};
-
-	const handleTagSelection = (tag) => {
-		dispatch({ type: "TAG_SELECT", payload: tag });
 	};
 
 	return (
@@ -59,21 +79,18 @@ const AddTaskUI = () => {
 					<TagButtonWrapper>
 						{tagLines.map((item, index) => {
 							return (
-								<TagButton
-									color={item.color}
+								<Tag
 									key={index}
-									type="button"
-									onClick={() => handleTagSelection(item)}
-									variant={TagSelected ? "$active" : null}
-								>
-									{item.name}
-								</TagButton>
+									tagName={state.task.tag.tagName}
+									item={item}
+									dispatch={dispatch}
+								></Tag>
 							);
 						})}
 					</TagButtonWrapper>
-					<AddToTaskBTN>
+					<AddToTaskBTN isEditing={state.isEditing}>
 						<IoPushOutline />
-						Add Task
+						{!state.isEditing ? "Add Task" : "Confirm Edit"}
 					</AddToTaskBTN>
 				</Form>
 			</Card>

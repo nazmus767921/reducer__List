@@ -4,10 +4,12 @@ export const styles = {
 		"bg-dark": "#11141f",
 		"white-100": "#fcfcfc",
 		"gray-100": "#a4a4a6",
+		"gray-200": "#58585b",
 		"red-500": "#cd424d",
 		"red-600": "#802930",
 		"yellow-500": "#f7c042",
 		"yellow-600": "#b7923e",
 		"teal-500": "#00e8ad",
+		"teal-600": "#009b73",
 	},
 };

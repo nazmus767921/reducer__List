@@ -5,10 +5,11 @@ import { useGlobalContext } from "../../context";
 
 const TextArea = styled.textarea`
 	background-color: transparent;
-
+	opacity: 60%;
+	font-family: sans-serif;
 	color: ${styles.colors["bg-dark"]};
 	border-radius: 0.3em;
-	font-size: ${(props) => (props.$smaller ? "1.7em" : "2em")};
+	font-size: ${(props) => (props.$smaller ? "1.4em" : "1.7em")};
 	border: 0px;
 	outline: none;
 	overflow: hidden;

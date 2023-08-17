@@ -11,12 +11,12 @@ const tagLines = [
 	{
 		id: 2,
 		name: "For Later",
-		color: styles.colors["teal-500"],
+		color: styles.colors["yellow-500"],
 	},
 	{
 		id: 3,
 		name: "Not So important",
-		color: styles.colors["gray-100"],
+		color: styles.colors["teal-500"],
 	},
 ];
 
@@ -66,14 +66,18 @@ const Form = styled.form`
 const TagButton = styled.button`
 	font-size: 1em;
 	background-color: ${(props) =>
-		props.variant === "$active" ? props.color : "#000"};
-	color: ${styles.colors["white-100"]};
+		props.variant === "$selected" ? props.color : "#ddd"};
+	color: ${(props) =>
+		props.variant === "$selected"
+			? styles.colors["white-100"]
+			: styles.colors["gray-200"]};
 	display: flex;
 	width: fit-content;
 	padding: 0.2em 0.7em;
 	border-radius: 9999px;
 	&:hover {
-		background-color: ${styles.colors["red-600"]};
+		color: ${styles.colors["white-100"]};
+		background-color: #5d5d5d;
 	}
 `;
 
@@ -91,10 +95,16 @@ const AddToTaskBTN = styled.button`
 	font-weight: 500;
 	color: ${styles.colors["bg"]};
 	border-radius: 0.5em;
-	background-color: ${styles.colors["yellow-500"]};
+	background-color: ${(props) =>
+		props.isEditing === true
+			? styles.colors["teal-500"]
+			: styles.colors["yellow-500"]};
 	padding: 0.3em 0.5em;
 	&:hover {
-		background-color: ${styles.colors["yellow-600"]};
+		background-color: ${(props) =>
+			props.isEditing === true
+				? styles.colors["teal-600"]
+				: styles.colors["yellow-600"]};
 	}
 `;
 

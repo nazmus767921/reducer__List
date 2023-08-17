@@ -20,7 +20,10 @@ const ActionWrapper = styled(FlexCol)`
 `;
 
 const Actions = ({ task }) => {
+	//? context and States
 	const { dispatch } = useGlobalContext();
+
+	//? Event Handlers
 	const handleDelete = (id) => {
 		dispatch({ type: "DELETE_TASK", payload: id });
 	};
@@ -28,6 +31,7 @@ const Actions = ({ task }) => {
 	const handleEdit = (task) => {
 		dispatch({ type: "EDIT_TASK", payload: task });
 	};
+
 	return (
 		<ActionWrapper>
 			<ActionBTNWrapper $around>
