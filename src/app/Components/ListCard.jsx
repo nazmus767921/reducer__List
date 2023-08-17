@@ -76,7 +76,7 @@ const DateContainer = styled(FlexCol)`
 	gap: 0.3em;
 `;
 
-const ListCard = ({ id, taskName, description, tag, entryDate }) => {
+const ListCard = ({ id, taskName, description, tag, entryDate, entryTime }) => {
 	const { weekDay, dateOfMonth, month } = entryDate;
 	return (
 		<Section>
@@ -87,8 +87,8 @@ const ListCard = ({ id, taskName, description, tag, entryDate }) => {
 							{weekDay}, {dateOfMonth} {month}
 						</Date>
 						<Time>
-							10:00
-							<SmallPara> AM</SmallPara>
+							{entryTime}
+							{/* <SmallPara></SmallPara> */}
 						</Time>
 					</DateContainer>
 					<VerticalLine />

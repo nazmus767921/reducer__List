@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Flex, FlexCol, Title } from "../../styles/components.styles";
 import { styles } from "../../styleGuide";
 import AddNewTaskBtn from "./AddNewTaskBtn";
+import getDate from "../GetDate";
 
 const Nav = styled(Flex)`
 	color: ${styles.colors["white-100"]};
@@ -16,39 +17,6 @@ const Date = styled.h3`
 	font-weight: 500;
 	opacity: 60%;
 `;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const getDate = () => {
-	const MONTHS = [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dec",
-	];
-	const WEEKDAY = [
-		"Sunday",
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-	];
-	const d = new window.Date();
-	const weekDay = d.getDay();
-	const Month = d.getMonth();
-	const dateOfMonth = d.getDate();
-
-	return { MONTHS, WEEKDAY, weekDay, Month, dateOfMonth };
-};
 
 const NavBar = () => {
 	const { MONTHS, WEEKDAY, weekDay, Month, dateOfMonth } = getDate();

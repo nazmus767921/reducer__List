@@ -1,6 +1,12 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer } from "./Reducer";
 const AppContext = createContext();
+
+const getLocalStorageData = () => {
+	const resp = localStorage.getItem("list");
+	const listData = JSON.parse(resp);
+	return listData;
+};
 
 const initialState = {
 	isAddTaskOpen: false,
@@ -10,15 +16,19 @@ const initialState = {
 		description: "",
 		tag: { id: "", tagName: "", color: "" },
 		entryDate: { weekDay: "", dateOfMonth: undefined, month: "" },
+		entryTime: "",
 	},
-	list: [],
+	list: getLocalStorageData(),
 	isEditing: false,
-	isInputFoucsed: true,
 };
 
 export const AppProvider = ({ children }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [state, dispatch] = useReducer(reducer, initialState);
+
+	useEffect(() => {
+		localStorage.setItem("list", JSON.stringify(state.list));
+	}, [state.list]);
 	return (
 		<AppContext.Provider value={{ state, dispatch }}>
 			{children}
