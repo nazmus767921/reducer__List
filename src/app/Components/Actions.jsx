@@ -19,22 +19,21 @@ const ActionWrapper = styled(FlexCol)`
 	border-radius: 0 20px 20px 0;
 `;
 
-const Actions = ({ id }) => {
+const Actions = ({ task }) => {
 	const { dispatch } = useGlobalContext();
-
 	const handleDelete = (id) => {
 		dispatch({ type: "DELETE_TASK", payload: id });
 	};
 
-	const handleEdit = (id) => {
-		dispatch({ type: "EDIT_TASK", payload: id });
+	const handleEdit = (task) => {
+		dispatch({ type: "EDIT_TASK", payload: task });
 	};
 	return (
 		<ActionWrapper>
 			<ActionBTNWrapper $around>
 				<button
 					type="button"
-					onClick={() => handleDelete(id)}
+					onClick={() => handleDelete(task.id)}
 				>
 					<FaTrash
 						style={{
@@ -46,7 +45,7 @@ const Actions = ({ id }) => {
 				</button>
 				<button
 					type="button"
-					onClick={() => handleEdit(id)}
+					onClick={() => handleEdit(task)}
 				>
 					<TbEdit
 						style={{

@@ -3,7 +3,7 @@ import { reducer } from "./Reducer";
 const AppContext = createContext();
 
 const initialState = {
-	// inputValue: "",
+	isAddTaskOpen: false,
 	task: {
 		id: "",
 		taskName: "",
@@ -12,6 +12,8 @@ const initialState = {
 		entryDate: { weekDay: "", dateOfMonth: undefined, month: "" },
 	},
 	list: [],
+	isEditing: false,
+	isInputFoucsed: true,
 };
 
 export const AppProvider = ({ children }) => {

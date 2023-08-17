@@ -3,7 +3,6 @@ import { RxDotsHorizontal } from "react-icons/rx";
 import { Flex, FlexCol, SmallPara } from "../styles/components.styles";
 import styled from "styled-components";
 import Actions from "./Actions";
-import { useGlobalContext } from "../context";
 
 const { colors } = styles;
 
@@ -105,7 +104,7 @@ const ListCard = ({ id, taskName, description, tag, entryDate }) => {
 					</ListContent>
 				</FlexCardWrap>
 			</Card>
-			<Actions id={id} />
+			<Actions task={{ id, taskName, description, tag, entryDate }} />
 		</Section>
 	);
 };

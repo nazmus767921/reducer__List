@@ -17,6 +17,7 @@ const Date = styled.h3`
 	opacity: 60%;
 `;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getDate = () => {
 	const MONTHS = [
 		"Jan",

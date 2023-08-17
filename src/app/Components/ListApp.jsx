@@ -1,6 +1,6 @@
 import { Flex, FlexCol } from "../styles/components.styles";
-import AddTaskUI from "./AddTaskUI/AddTaskUI";
-import ListCard from "./ListCard";
+// import AddTaskUI from "./AddTaskUI/AddTaskUI";
+// import ListCard from "./ListCard";
 import NavBar from "./NavBar/NavBar";
 import styled from "styled-components";
 import TaskLists from "./TaskLists/TaskLists";

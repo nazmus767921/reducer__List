@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { IoIosAdd } from "react-icons/io";
 import { styles } from "../../styleGuide";
 import AddTaskUI from "../AddTaskUI/AddTaskUI";
-import { useState } from "react";
+import { useGlobalContext } from "../../context";
 
 const AddButton = styled.button`
 	font-size: 1.25rem;
@@ -23,14 +23,11 @@ const AddButton = styled.button`
 `;
 
 const AddNewTaskBtn = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const { dispatch } = useGlobalContext();
 	return (
 		<>
-			<AddTaskUI
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-			/>
-			<AddButton onClick={() => setIsOpen(true)}>
+			<AddTaskUI />
+			<AddButton onClick={() => dispatch({ type: "TOGGLE_OPEN_ADD_TASK" })}>
 				<IoIosAdd style={{ width: "1.35em", height: "1.35em" }} />
 				New Task
 			</AddButton>

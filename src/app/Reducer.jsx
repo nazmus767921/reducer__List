@@ -1,6 +1,14 @@
 import { getDate } from "./Components/NavBar/NavBar";
 
 export const reducer = (state, action) => {
+	if (action.type === "TOGGLE_OPEN_ADD_TASK") {
+		//
+		return {
+			...state,
+			isAddTaskOpen: !state.isAddTaskOpen,
+		};
+	}
+
 	if (action.type === "TAKE_INPUT") {
 		const e = action.payload;
 		const newTask = {
@@ -34,7 +42,7 @@ export const reducer = (state, action) => {
 			newList = [...state.list, newTask];
 		} else {
 			const tempTag = { id: undefined, tagName: "undefined" };
-			const tempTask = { ...state.task, tag: tempTag };
+			const tempTask = { ...state.task, tag: tempTag, entryDate: newDate };
 			newList = [...state.list, tempTask];
 		}
 
@@ -52,4 +60,22 @@ export const reducer = (state, action) => {
 		const newList = state.list.filter((task) => task.id !== id);
 		return { ...state, list: newList };
 	}
+
+	if (action.type === "EDIT_TASK") {
+		const editingTask = state.list.map((task) => {
+			if (task.id === action.payload.id) {
+				return task;
+			}
+		});
+
+		return {
+			...state,
+			isEditing: !state.isEditing,
+			isAddTaskOpen: true,
+			task: { ...editingTask[editingTask.length - 1] },
+			isInputFoucsed: true,
+		};
+	}
+
+	return state;
 };
