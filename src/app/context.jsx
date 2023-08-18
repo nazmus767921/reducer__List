@@ -1,17 +1,14 @@
-import {
-	createContext,
-	useContext,
-	useEffect,
-	useReducer,
-	useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer } from "./Reducer";
 const AppContext = createContext();
 
 const getLocalStorageData = () => {
 	const resp = localStorage.getItem("list");
 	const listData = JSON.parse(resp);
-	return listData;
+	if (listData) {
+		return listData;
+	}
+	return [];
 };
 
 const initialState = {

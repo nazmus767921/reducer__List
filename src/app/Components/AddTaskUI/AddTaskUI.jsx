@@ -13,17 +13,10 @@ import {
 	TagButtonWrapper,
 	AddToTaskBTN,
 } from "./AddTaskUI.styles";
-import { useState } from "react";
-
 
 //? Tag component
 function Tag(props) {
-	const [SelectedTag, setSelectedTag] = useState("temp");
-
-	// const [SelectedTag, setSelectedTag] = useState("temp");
-
 	const handleTagSelection = (tag) => {
-		setSelectedTag(tag.name);
 		props.dispatch({ type: "TAG_SELECT", payload: tag });
 	};
 
@@ -32,7 +25,7 @@ function Tag(props) {
 			color={props.item.color}
 			type="button"
 			onClick={() => handleTagSelection(props.item)}
-			variant={SelectedTag === props.tagName ? "$selected" : "$notSelected"}
+			variant={props.item.name === props.tagName ? "$selected" : "$notSelected"}
 		>
 			{props.item.name}
 		</TagButton>
@@ -82,6 +75,7 @@ const AddTaskUI = () => {
 								<Tag
 									key={index}
 									tagName={state.task.tag.tagName}
+									state={state}
 									item={item}
 									dispatch={dispatch}
 								></Tag>
