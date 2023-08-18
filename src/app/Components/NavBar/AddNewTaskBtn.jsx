@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { IoIosAdd } from "react-icons/io";
-import { styles } from "../../styleGuide";
+import { styles, devices } from "../../styleGuide";
 import AddTaskUI from "../AddTaskUI/AddTaskUI";
 import { useGlobalContext } from "../../context";
 
 const AddButton = styled.button`
-	font-size: 1.25rem;
+	@media only screen and (${devices.md}) {
+		font-size: 1.25em;
+	}
 	font-weight: 500;
 	display: flex;
 	justify-content: space-between;

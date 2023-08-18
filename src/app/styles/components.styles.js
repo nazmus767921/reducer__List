@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { styles } from "../styleGuide";
+import { styles, devices } from "../styleGuide";
 
 const { colors } = styles;
 
 export const Title = styled.h1`
-	font-size: 3em;
+	font-size: 2em;
+	
+	@media only screen and (${devices.md}) {
+		font-size: 2.5em;
+	}
 	font-weight: 600;
 	text-align: center;
 	color: ${colors["yellow-500"]};

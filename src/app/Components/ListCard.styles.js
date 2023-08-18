@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { Flex, FlexCol } from "../styles/components.styles";
-import { styles } from "../styleGuide";
+import { styles, devices } from "../styleGuide";
 const { colors } = styles;
 
 // Card
@@ -17,7 +17,10 @@ const Card = styled.div`
 const Section = styled.div`
 	position: relative;
 	max-width: fit-content;
-	min-width: 70%;
+	min-width: 80%;
+	@media only screen and (${devices.xl}) {
+		min-width: 70%;
+	}
 `;
 
 const FlexCardWrap = styled(Flex)`
