@@ -3,7 +3,7 @@ import { reducer } from "./Reducer";
 const AppContext = createContext();
 
 const getLocalStorageData = () => {
-	const resp = localStorage.getItem("list");
+	const resp = localStorage.getItem("prevList");
 	const listData = JSON.parse(resp);
 	if (listData) {
 		return listData;
@@ -32,8 +32,9 @@ export const AppProvider = ({ children }) => {
 	//AddTaskUI->TAG component
 
 	useEffect(() => {
-		localStorage.setItem("list", JSON.stringify(state.list));
+		localStorage.setItem("prevList", JSON.stringify(state.prevList));
 	}, [state.list]);
+
 	return (
 		<AppContext.Provider value={{ state, dispatch }}>
 			{children}

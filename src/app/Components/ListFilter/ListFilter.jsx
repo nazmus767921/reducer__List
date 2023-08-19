@@ -20,7 +20,34 @@ const tagLines = [
 		name: "Not So important",
 		color: styles.colors["teal-500"],
 	},
+	{
+		id: 404,
+		name: "undefined",
+		color: styles.colors["white-100"],
+	},
+	{
+		id: 411,
+		name: "Show All",
+		color: styles.colors["white-100"],
+	},
 ];
+
+const CountBubble = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: ${styles.colors["bg-dark"]};
+	border-radius: 999em;
+	width: 1.3em;
+	height: 1.3em;
+	right: -0.4em;
+	top: -0.6em;
+`;
+
+const TagContainer = styled.div`
+	position: relative;
+`;
 
 //? Tag component
 function Tag(props) {
@@ -29,7 +56,8 @@ function Tag(props) {
 	};
 
 	return (
-		<>
+		<TagContainer>
+			<CountBubble>2</CountBubble>
 			<TagButton
 				color={props.item.color}
 				type="button"
@@ -40,7 +68,7 @@ function Tag(props) {
 			>
 				{props.item.name}
 			</TagButton>
-		</>
+		</TagContainer>
 	);
 }
 
@@ -74,15 +102,13 @@ const ListFilter = () => {
 		<TagButtonWrapper>
 			{tagLines.map((item, index) => {
 				return (
-					<>
-						<Tag
-							key={index}
-							tagName={state.task.tag.tagName}
-							state={state}
-							item={item}
-							dispatch={dispatch}
-						/>
-					</>
+					<Tag
+						key={index}
+						tagName={state.task.tag.tagName}
+						state={state}
+						item={item}
+						dispatch={dispatch}
+					/>
 				);
 			})}
 		</TagButtonWrapper>

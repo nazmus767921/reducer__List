@@ -48,10 +48,10 @@ export const reducer = (state, action) => {
 		const e = action.payload;
 		e.preventDefault();
 
-		if (state.prevList.length > 0) {
-			//
-			state = { ...state, list: state.prevList };
-		}
+		// if (state.prevList.length > 0) {
+		// 	//
+		// 	state = { ...state, list: state.prevList };
+		// }
 
 		//? submitting conditions
 		let newList = [];
@@ -80,7 +80,7 @@ export const reducer = (state, action) => {
 			return { ...state, list: newList, task: emptyTask, isAddTaskOpen: false };
 		} else {
 			//if everything is okay
-			const tempTag = { id: undefined, tagName: "undefined" };
+			const tempTag = { id: 404, tagName: "undefined" };
 			const tempTask = {
 				...state.task,
 				tag: tempTag,
@@ -115,21 +115,27 @@ export const reducer = (state, action) => {
 
 	if (action.type === "FILTER_LIST") {
 		//
-		if (state.prevList.length <= 0) {
-			state = { ...state, prevList: state.list };
-			const filteredList = state.list.filter(
-				(task) => task.tag.id === action.payload.id
-			);
+		if (action.payload.id === 411) {
+			if (state.prevList.length > 0) {
+				return { ...state, list: state.prevList };
+			}
+		} else {
+			if (state.prevList.length <= 0) {
+				state = { ...state, prevList: state.list };
+				const filteredList = state.list.filter(
+					(task) => task.tag.id === action.payload.id
+				);
 
-			return { ...state, list: filteredList };
-		}
-		if (state.prevList.length > 0) {
-			state = { ...state, list: state.prevList };
-			const filteredList = state.list.filter(
-				(task) => task.tag.id === action.payload.id
-			);
+				return { ...state, list: filteredList };
+			}
+			if (state.prevList.length > 0) {
+				state = { ...state, list: state.prevList };
+				const filteredList = state.list.filter(
+					(task) => task.tag.id === action.payload.id
+				);
 
-			return { ...state, list: filteredList };
+				return { ...state, list: filteredList };
+			}
 		}
 	}
 
