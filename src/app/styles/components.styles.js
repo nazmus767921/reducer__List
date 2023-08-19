@@ -5,7 +5,6 @@ const { colors } = styles;
 
 export const Title = styled.h1`
 	font-size: 2em;
-	
 	@media only screen and (${devices.md}) {
 		font-size: 2.5em;
 	}

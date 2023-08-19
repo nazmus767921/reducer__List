@@ -48,6 +48,11 @@ export const reducer = (state, action) => {
 		const e = action.payload;
 		e.preventDefault();
 
+		if (state.prevList.length > 0) {
+			//
+			state = { ...state, list: state.prevList };
+		}
+
 		//? submitting conditions
 		let newList = [];
 
@@ -91,7 +96,8 @@ export const reducer = (state, action) => {
 	if (action.type === "DELETE_TASK") {
 		const id = action.payload;
 		const newList = state.list.filter((task) => task.id !== id);
-		return { ...state, list: newList };
+		const newPrevList = state.prevList.filter((task) => task.id !== id);
+		return { ...state, list: newList, prevList: newPrevList };
 	}
 
 	if (action.type === "EDIT_TASK") {
@@ -105,6 +111,26 @@ export const reducer = (state, action) => {
 			isAddTaskOpen: true,
 			task: { ...editingTask[editingTask.length - 1] },
 		};
+	}
+
+	if (action.type === "FILTER_LIST") {
+		//
+		if (state.prevList.length <= 0) {
+			state = { ...state, prevList: state.list };
+			const filteredList = state.list.filter(
+				(task) => task.tag.id === action.payload.id
+			);
+
+			return { ...state, list: filteredList };
+		}
+		if (state.prevList.length > 0) {
+			state = { ...state, list: state.prevList };
+			const filteredList = state.list.filter(
+				(task) => task.tag.id === action.payload.id
+			);
+
+			return { ...state, list: filteredList };
+		}
 	}
 
 	return state;

@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../../context";
 import ListCard from "../ListCard";
 import styled from "styled-components";
+import ListFilter from "../ListFilter/ListFilter";
 
 const ListsContainer = styled.div`
 	display: flex;
@@ -20,6 +21,7 @@ const TaskLists = () => {
 	const { state } = useGlobalContext();
 	return (
 		<ListsContainer>
+			<ListFilter />
 			{state.list.map((task, index) => {
 				return (
 					<ListCard

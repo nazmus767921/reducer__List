@@ -22,6 +22,7 @@ const initialState = {
 		entryTime: "",
 	},
 	list: getLocalStorageData(),
+	prevList: [],
 	isEditing: false,
 };
 
