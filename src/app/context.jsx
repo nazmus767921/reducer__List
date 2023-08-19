@@ -3,7 +3,7 @@ import { reducer } from "./Reducer";
 const AppContext = createContext();
 
 const getLocalStorageData = () => {
-	const resp = localStorage.getItem("prevList");
+	const resp = localStorage.getItem("list");
 	const listData = JSON.parse(resp);
 	if (listData) {
 		return listData;
@@ -21,8 +21,12 @@ const initialState = {
 		entryDate: { weekDay: "", dateOfMonth: undefined, month: "" },
 		entryTime: "",
 	},
+	isFiltering: {
+		status: false,
+		selectedTagID: 411,
+		filteredList: [],
+	},
 	list: getLocalStorageData(),
-	prevList: [],
 	isEditing: false,
 };
 
@@ -32,7 +36,7 @@ export const AppProvider = ({ children }) => {
 	//AddTaskUI->TAG component
 
 	useEffect(() => {
-		localStorage.setItem("prevList", JSON.stringify(state.prevList));
+		localStorage.setItem("list", JSON.stringify(state.list));
 	}, [state.list]);
 
 	return (

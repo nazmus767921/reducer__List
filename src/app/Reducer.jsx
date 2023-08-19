@@ -48,11 +48,6 @@ export const reducer = (state, action) => {
 		const e = action.payload;
 		e.preventDefault();
 
-		// if (state.prevList.length > 0) {
-		// 	//
-		// 	state = { ...state, list: state.prevList };
-		// }
-
 		//? submitting conditions
 		let newList = [];
 
@@ -64,8 +59,20 @@ export const reducer = (state, action) => {
 				}
 				return { ...task };
 			});
+
+			const editedFilteredList = state.isFiltering.filteredList.filter(
+				(task) => {
+					return task.id !== state.task.id;
+				}
+			);
 			newList = EditedList;
-			return { ...state, list: newList, task: emptyTask, isAddTaskOpen: false };
+			return {
+				...state,
+				list: newList,
+				task: emptyTask,
+				isAddTaskOpen: false,
+				isFiltering: { ...state.isFiltering, filteredList: editedFilteredList },
+			};
 		}
 
 		//checks if any of the tags are selected
@@ -77,7 +84,17 @@ export const reducer = (state, action) => {
 				id: state.list.length + 1,
 			};
 			newList = [...state.list, newTask];
-			return { ...state, list: newList, task: emptyTask, isAddTaskOpen: false };
+			return {
+				...state,
+				list: newList,
+				task: emptyTask,
+				isAddTaskOpen: false,
+				isFiltering: {
+					...state.isFiltering,
+					status: false,
+					selectedTagID: 411,
+				},
+			};
 		} else {
 			//if everything is okay
 			const tempTag = { id: 404, tagName: "undefined" };
@@ -89,15 +106,37 @@ export const reducer = (state, action) => {
 				id: state.list.length + 1,
 			};
 			newList = [...state.list, tempTask];
-			return { ...state, list: newList, task: emptyTask, isAddTaskOpen: false };
+			return {
+				...state,
+				list: newList,
+				task: emptyTask,
+				isAddTaskOpen: false,
+				isFiltering: {
+					...state.isFiltering,
+					status: false,
+					selectedTagID: 411,
+				},
+			};
 		}
 	}
 
 	if (action.type === "DELETE_TASK") {
+		if (state.isFiltering.status) {
+			//
+			const id = action.payload;
+			const newList = state.list.filter((task) => task.id !== id);
+			const newFilteredList = state.isFiltering.filteredList.filter(
+				(task) => task.id !== id
+			);
+			return {
+				...state,
+				list: newList,
+				isFiltering: { ...state.isFiltering, filteredList: newFilteredList },
+			};
+		}
 		const id = action.payload;
 		const newList = state.list.filter((task) => task.id !== id);
-		const newPrevList = state.prevList.filter((task) => task.id !== id);
-		return { ...state, list: newList, prevList: newPrevList };
+		return { ...state, list: newList };
 	}
 
 	if (action.type === "EDIT_TASK") {
@@ -116,26 +155,26 @@ export const reducer = (state, action) => {
 	if (action.type === "FILTER_LIST") {
 		//
 		if (action.payload.id === 411) {
-			if (state.prevList.length > 0) {
-				return { ...state, list: state.prevList };
-			}
+			return {
+				...state,
+				isFiltering: {
+					status: false,
+					selectedTagID: action.payload.id,
+					filteredList: [],
+				},
+			};
 		} else {
-			if (state.prevList.length <= 0) {
-				state = { ...state, prevList: state.list };
-				const filteredList = state.list.filter(
-					(task) => task.tag.id === action.payload.id
-				);
-
-				return { ...state, list: filteredList };
-			}
-			if (state.prevList.length > 0) {
-				state = { ...state, list: state.prevList };
-				const filteredList = state.list.filter(
-					(task) => task.tag.id === action.payload.id
-				);
-
-				return { ...state, list: filteredList };
-			}
+			const filteredList = state.list.filter(
+				(task) => task.tag.id == action.payload.id
+			);
+			return {
+				...state,
+				isFiltering: {
+					status: true,
+					selectedTagID: action.payload.id,
+					filteredList,
+				},
+			};
 		}
 	}
 

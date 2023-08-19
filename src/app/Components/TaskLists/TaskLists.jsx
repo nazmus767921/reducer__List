@@ -19,17 +19,24 @@ const ListsContainer = styled.div`
 
 const TaskLists = () => {
 	const { state } = useGlobalContext();
+	const taskList =
+		state.isFiltering.status !== true
+			? state.list
+			: state.isFiltering.filteredList;
 	return (
 		<ListsContainer>
 			<ListFilter />
-			{state.list.map((task, index) => {
-				return (
-					<ListCard
-						key={index + 1}
-						{...task}
-					/>
-				);
-			})}
+
+			{state.isFiltering.status === true &&
+			state.isFiltering.filteredList.length <= 0 ? (
+				<h2>No matching task</h2>
+			) : state.list.length ? (
+				taskList.map((task, index) => {
+					return <ListCard key={index + 1} {...task} />;
+				})
+			) : (
+				<h2>No task assigned to today</h2>
+			)}
 		</ListsContainer>
 	);
 };
