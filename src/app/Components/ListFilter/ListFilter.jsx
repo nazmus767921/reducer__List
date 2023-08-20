@@ -86,8 +86,6 @@ function Tag(props) {
 		(task) => task.tag.id === props.item.id
 	).length;
 
-	console.log(state.isFiltering.filteredList[0]?.tag.id);
-
 	return (
 		<TagContainer>
 			{matchingTagCount > 0 && <CountBubble>{matchingTagCount}</CountBubble>}

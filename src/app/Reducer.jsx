@@ -61,10 +61,14 @@ export const reducer = (state, action) => {
 			});
 
 			const editedFilteredList = state.isFiltering.filteredList.filter(
-				(task) => {
-					return task.id !== state.task.id;
+				(item) => {
+					// debugger;
+					return item.id !== state.task.id;
 				}
 			);
+
+			// have to make a conditional statement that handles if i only change the taskName or description.
+
 			newList = EditedList;
 			return {
 				...state,
