@@ -57,15 +57,54 @@ export const reducer = (state, action) => {
 				if (task.id === state.task.id) {
 					return { ...state.task };
 				}
-				return { ...task };
+				return task;
 			});
 
-			const editedFilteredList = state.isFiltering.filteredList.filter(
-				(item) => {
-					// debugger;
-					return item.id !== state.task.id;
-				}
-			);
+			// const editedFilteredList = state.isFiltering.filteredList.filter(
+			// 	(item) => {
+			// 		// debugger;
+			// 		return item.id !== state.task.id;
+			// 	}
+			// );
+
+			// new lines of code
+
+			const test = () => {
+				state.isFiltering.filteredList.map((filteredTask) => {
+					if (filteredTask.tag.id === state.task.tag.id) {
+						if (filteredTask.id === state.task.id) {
+							return {
+								...filteredTask,
+								taskName: state.task.taskName,
+								description: state.task.description,
+								tag: state.task.tag,
+							};
+						}
+						return filteredTask;
+					}
+				});
+			};
+			const editedFilteredList = state.isFiltering.filteredList
+				.filter((filteredTask) => {
+					// explanation:  check if the tag has been changed| How? when i chick on the edit button it sets the respected task (from which task the edit has been invoked) to the state.task object| and when i change the tags in edit menu the state.task.tag objects tag id also change| so, if my filteredList tag id does match the task.tag.id then it means tag has been changed and it shouldn't be seen on the current filter menu.
+					if (filteredTask.tag.id !== state.task.tag.id) {
+						return filteredTask.id !== state.task.id;
+					} else {
+						//returning true gives the exact same array given to it.
+						return true;
+					}
+				}) //then map the array and replace the edited task with the filteredList tasks if the task with same id as task still exist (means tag not change. and it still sits in the filteredList)
+				.map((obj) => {
+					if (obj.id === state.task.id) {
+						return {
+							...obj,
+							taskName: state.task.taskName,
+							description: state.task.description,
+							tag: state.task.tag,
+						};
+					}
+					return obj;
+				});
 
 			// have to make a conditional statement that handles if i only change the taskName or description.
 
