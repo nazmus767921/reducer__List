@@ -83,7 +83,7 @@ function Tag(props) {
 	};
 
 	const matchingTagCount = state.list.filter(
-		(task) => task.tag.id === props.item.id
+		(task) => task?.tag?.id === props.item.id
 	).length;
 
 	return (

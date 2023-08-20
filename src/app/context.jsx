@@ -18,7 +18,7 @@ const initialState = {
 		taskName: "",
 		description: "",
 		tag: { id: "", tagName: "", color: "" },
-		entryDate: { weekDay: "", dateOfMonth: undefined, month: "" },
+		entryDate: { weekDay: "", dateOfMonth: "", month: "" },
 		entryTime: "",
 	},
 	isFiltering: {
