@@ -14,8 +14,11 @@ import {
 	ListContentTop,
 	DateContainer,
 } from "./ListCard.styles";
+import { useState } from "react";
 
 const ListCard = ({ id, taskName, description, tag, entryDate, entryTime }) => {
+	const [showActions, setShowActions] = useState(false);
+
 	const { weekDay, dateOfMonth, month } = entryDate;
 	return (
 		<Section>
@@ -34,7 +37,10 @@ const ListCard = ({ id, taskName, description, tag, entryDate, entryTime }) => {
 					<ListContent>
 						<ListContentTop $between>
 							<Tag color={tag.color}>{tag.tagName}</Tag>
-							<button type="button">
+							<button
+								type="button"
+								onClick={() => setShowActions((prev) => !prev)}
+							>
 								<RxDotsHorizontal />
 							</button>
 						</ListContentTop>
@@ -43,7 +49,9 @@ const ListCard = ({ id, taskName, description, tag, entryDate, entryTime }) => {
 					</ListContent>
 				</FlexCardWrap>
 			</Card>
-			<Actions task={{ id, taskName, description, tag, entryDate }} />
+			{showActions && (
+				<Actions task={{ id, taskName, description, tag, entryDate }} />
+			)}
 		</Section>
 	);
 };

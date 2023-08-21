@@ -7,14 +7,14 @@ import { useGlobalContext } from "../context";
 
 const ActionBTNWrapper = styled(FlexCol)`
 	height: 100%;
-	padding: 0 1em 0 1em;
+	padding: 0 1em 0 2em;
 `;
 
 const ActionWrapper = styled(FlexCol)`
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 100%;
+	left: 96%;
 	background-color: ${styles.colors["bg-dark"]};
 	border-radius: 0 20px 20px 0;
 `;
