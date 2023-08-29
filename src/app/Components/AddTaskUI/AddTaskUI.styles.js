@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Flex } from "../../styles/components.styles";
-import { styles } from "../../styleGuide";
+import { devices, styles } from "../../styleGuide";
 
 const tagLines = [
 	{
@@ -45,6 +45,10 @@ const Card = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
+	font-size: 0.7em;
+	@media only screen and (${devices.md}) {
+		font-size: 1em;
+	}
 `;
 
 const Input = styled.input`
@@ -83,7 +87,13 @@ const TagButton = styled.button`
 
 const TagButtonWrapper = styled(Flex)`
 	flex-wrap: wrap;
+	justify-content: space-around;
+	font-size: 1.35em;
 	gap: 0.5em;
+	@media only screen and (${devices.md}) {
+		justify-content: flex-start;
+		font-size: 1em;
+	}
 `;
 
 const AddToTaskBTN = styled.button`

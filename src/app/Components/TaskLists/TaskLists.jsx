@@ -2,19 +2,25 @@ import { useGlobalContext } from "../../context";
 import ListCard from "../ListCard";
 import styled from "styled-components";
 import ListFilter from "../ListFilter/ListFilter";
+import { devices } from "../../styleGuide";
 
 const ListsContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1em;
-	padding: 2em 2em;
+	margin-top: 3em;
+	gap: 4em;
+	padding: 2em 0;
 	overflow-y: scroll;
 	&::-webkit-scrollbar {
 		display: none;
 	}
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+
+	@media only screen and (${devices.md}) {
+		padding: 2em 2em;
+	}
 `;
 
 const TaskLists = () => {

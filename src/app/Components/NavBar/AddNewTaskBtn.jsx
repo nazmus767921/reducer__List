@@ -5,9 +5,6 @@ import AddTaskUI from "../AddTaskUI/AddTaskUI";
 import { useGlobalContext } from "../../context";
 
 const AddButton = styled.button`
-	@media only screen and (${devices.md}) {
-		font-size: 1.25em;
-	}
 	font-weight: 500;
 	display: flex;
 	justify-content: space-between;
@@ -15,12 +12,19 @@ const AddButton = styled.button`
 	gap: 0.2em;
 	background-color: ${styles.colors["bg-dark"]};
 	border-radius: 0.75em;
-	padding: 0.6em 1.5em;
+	padding: 0.6em 0.6em;
 	height: fit-content;
 	transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 	&:hover {
 		color: ${styles.colors["bg-dark"]};
 		background-color: ${styles.colors["yellow-500"]};
+	}
+	@media only screen and (${devices.md}) {
+		padding: 0.6em 1.5em;
+		font-size: 1.25em;
+		&::after {
+			content: "New Task";
+		}
 	}
 `;
 
@@ -31,7 +35,6 @@ const AddNewTaskBtn = () => {
 			<AddTaskUI />
 			<AddButton onClick={() => dispatch({ type: "TOGGLE_OPEN_ADD_TASK" })}>
 				<IoIosAdd style={{ width: "1.35em", height: "1.35em" }} />
-				New Task
 			</AddButton>
 		</>
 	);

@@ -7,8 +7,8 @@ const { colors } = styles;
 const Card = styled.div`
 	color: ${colors["bg-dark"]};
 	background-color: ${colors["white-100"]};
-	padding: 20px 30px;
-	border-radius: 10px;
+	padding: 1.25em 1.875em;
+	border-radius: 1em;
 	box-shadow: 4px 0 10px #552222;
 	position: relative;
 	z-index: 10;
@@ -17,14 +17,17 @@ const Card = styled.div`
 const Section = styled.div`
 	position: relative;
 	max-width: fit-content;
-	min-width: 80%;
-	@media only screen and (${devices.xl}) {
+	min-width: 100%;
+	@media only screen and (${devices.md}) {
 		min-width: 70%;
 	}
 `;
 
 const FlexCardWrap = styled(Flex)`
-	gap: 2em;
+	gap: 1.25em;
+	@media only screen and (${devices.md}) {
+		gap: 2em;
+	}
 `;
 
 const VerticalLine = styled.div`
@@ -35,6 +38,7 @@ const VerticalLine = styled.div`
 
 const Date = styled.h3`
 	font-size: 1em;
+	font-weight: bold;
 	color: ${colors["bg-dark"]};
 	font-weight: 500;
 `;
@@ -48,12 +52,19 @@ const Time = styled(Date)`
 
 const Tag = styled.p`
 	color: ${(props) => props.color};
+	font-size: 1.25em;
+	@media only screen and (${devices.md}) {
+		font-size: 1em;
+	}
 `;
 
 const Title = styled.h2`
 	color: ${colors["bg-dark"]};
-	font-size: 20px;
 	font-weight: 500;
+		font-size: 1.75em;
+	@media only screen and (${devices.md}) {
+		font-size: 1.5em;
+	}
 `;
 
 const Description = styled.p`
@@ -73,7 +84,11 @@ const ListContentTop = styled(Flex)`
 `;
 
 const DateContainer = styled(FlexCol)`
+	font-size: 1.35em;
 	gap: 0.3em;
+	@media only screen and (${devices.md}) {
+		font-size: 1em;
+	}
 `;
 
 export {

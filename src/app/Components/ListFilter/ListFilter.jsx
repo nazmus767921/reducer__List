@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { styles } from "../../styleGuide";
+import { devices, styles } from "../../styleGuide";
 import { useGlobalContext } from "../../context";
 import { Flex } from "../../styles/components.styles";
 
@@ -36,6 +36,19 @@ const tagLines = [
 const TagButtonWrapper = styled(Flex)`
 	flex-wrap: wrap;
 	gap: 0.5em;
+	font-size: 1.5em;
+	justify-content: center;
+	padding: 0.2em;
+	border: 1px solid #acacac;
+	border-radius: 1em;
+	width: fit-content;
+	@media only screen and (${devices.md}) {
+		justify-content: space-between;
+		padding: 0.2em;
+		border: 1px solid #acacac;
+		border-radius: 2em;
+		font-size: 1em;
+	}
 `;
 
 const TagButton = styled.button`
