@@ -9,7 +9,7 @@ const ListsContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	margin-top: 3em;
-	gap: 4em;
+	gap: 1em;
 	padding: 2em 0;
 	overflow-y: scroll;
 	&::-webkit-scrollbar {

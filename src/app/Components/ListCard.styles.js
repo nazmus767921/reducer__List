@@ -16,10 +16,12 @@ const Card = styled.div`
 
 const Section = styled.div`
 	position: relative;
-	max-width: fit-content;
+	/* max-width: fit-content; */
 	min-width: 100%;
+	max-width: 100%;
 	@media only screen and (${devices.md}) {
 		min-width: 70%;
+		max-width: 70%;
 	}
 `;
 
@@ -61,7 +63,7 @@ const Tag = styled.p`
 const Title = styled.h2`
 	color: ${colors["bg-dark"]};
 	font-weight: 500;
-		font-size: 1.75em;
+	font-size: 1.75em;
 	@media only screen and (${devices.md}) {
 		font-size: 1.5em;
 	}
@@ -76,6 +78,8 @@ const Description = styled.p`
 
 const ListContent = styled(FlexCol)`
 	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
 `;
 
 const ListContentTop = styled(Flex)`
